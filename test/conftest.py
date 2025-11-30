@@ -6,7 +6,7 @@ from selenium.webdriver.firefox.options import Options as firefox_options
 @pytest.fixture
 def start_browser():
     options = Options()
-    options.add_argument("--headless=new")
+    #options.add_argument("--headless=new")
 
     driver = webdriver.Chrome(options=options)
     driver.get("https://www.facebook.com")
