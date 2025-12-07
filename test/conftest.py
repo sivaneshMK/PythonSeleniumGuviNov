@@ -23,8 +23,20 @@ def start_ohrms():
 @pytest.fixture
 def launch_thandhi():
     options = firefox_options()
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
+    options.set_preference("dom.webnotifications.enabled", False)
     driver = webdriver.Firefox(options)
     driver.get("https://www.dailythanthi.com/")
     driver.maximize_window()
+    return driver
+
+@pytest.fixture()
+def launch_chrome():
+    option = Options()
+    option.add_argument("--disable-notifications")
+    option.add_experimental_option("detach", True)
+    option.add_argument("--start-maximized")
+    option.add_experimental_option("prefs",{"profile.default_content_setting_values.geolocation":2}) # 1-Allow , 2-Block
+    driver = webdriver.Chrome(option)
+    driver.get("https://www.dailythanthi.com/")
     return driver
